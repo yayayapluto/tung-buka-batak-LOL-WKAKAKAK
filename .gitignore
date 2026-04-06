@@ -26,3 +26,7 @@ Thumbs.db
 
 # Claude things
 .claude/*
+
+# Test/scratch files
+*.mhtml
+gem_copy_res*.txt

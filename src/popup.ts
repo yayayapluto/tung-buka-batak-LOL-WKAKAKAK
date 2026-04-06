@@ -38,7 +38,57 @@ async function copyPageText(): Promise<void> {
 
 	const results = await chrome.scripting.executeScript({
 		target: { tabId: tab.id },
-		func: () => document.body.innerText,
+		func: () => {
+			// Scope to main content only — skips nav, sidebar, messaging panel
+			const root = (document.querySelector('[role="main"]') ||
+				document.querySelector("main") ||
+				document.body) as HTMLElement;
+
+			const clone = root.cloneNode(true) as HTMLElement;
+
+			// Remove scripts and styles (detached clone may expose their text)
+			clone
+				.querySelectorAll("script,style")
+				.forEach((el) => el.remove());
+
+			// Keep only images with a real file extension (content images),
+			// remove theme icons which are served as PHP without an extension
+			clone.querySelectorAll("img").forEach((img) => {
+				const src = (img as HTMLImageElement).src;
+				if (/\.(jpe?g|png|gif|webp|bmp|svg)(\?|$)/i.test(src)) {
+					img.parentNode?.replaceChild(
+						document.createTextNode(`[Gambar: ${src}]`),
+						img,
+					);
+				} else {
+					img.remove();
+				}
+			});
+
+			// Process HTML directly so block elements become newlines
+			// (innerText on detached clones doesn't reliably do this)
+			let html = clone.innerHTML;
+			html = html.replace(/<br\s*\/?>/gi, "\n");
+			html = html.replace(
+				/<\/(p|div|h[1-6]|li|tr|section|article|blockquote)>/gi,
+				"\n",
+			);
+			html = html.replace(/<[^>]+>/g, "");
+
+			// Decode HTML entities safely via textarea
+			const tmp = document.createElement("textarea");
+			tmp.innerHTML = html;
+
+			return tmp.value
+				.split("\n")
+				.map((line) => line.trim())
+				.filter((line) => line !== "")
+				.map((line) =>
+					/^Question\s+\d+/i.test(line) ? `----\n${line}` : line,
+				)
+				.join("\n")
+				.trim();
+		},
 	});
 
 	const text = results[0]?.result;
