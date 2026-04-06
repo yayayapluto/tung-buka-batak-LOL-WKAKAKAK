@@ -2,10 +2,19 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Setup
+
+```bash
+bun install
+cp .env.example .env
+```
+
 ## Commands
 
 ```bash
 bun run build        # compile → minify → obfuscate → dist/
+bun run check        # lint + format check (read-only)
+bun run lint         # lint + format check with auto-fix
 bun run type-check   # tsc --noEmit, no output files
 ```
 
