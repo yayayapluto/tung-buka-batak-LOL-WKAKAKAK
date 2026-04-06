@@ -90,25 +90,55 @@
             .btn-open:active {
                 background: #252529;
             }
+
+            .btn-copy {
+                width: 100%;
+                padding: 6px 10px;
+                background: none;
+                border: 1px solid #1e1e22;
+                border-radius: 5px;
+                color: #9090a0;
+                font-size: 11px;
+                font-weight: 500;
+                cursor: pointer;
+                text-align: left;
+                transition: background 0.1s, color 0.1s, border-color 0.1s;
+            }
+
+            .btn-copy:hover {
+                background: #1e1e22;
+                color: #e0e0ec;
+                border-color: #4a4a58;
+            }
+
+            .btn-copy.copied {
+                color: #6fcf97;
+                border-color: #6fcf97;
+            }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="section-label">POSISI</div>
             <div class="btn-row">
-                <button class="btn-pos" id="posLeft">Kiri</button>
-                <button class="btn-pos active" id="posRight">Kanan</button>
+                <button type="button" class="btn-pos" id="posLeft">Kiri</button>
+                <button type="button" class="btn-pos active" id="posRight">Kanan</button>
             </div>
 
             <div class="divider"></div>
 
+            <div class="section-label">SALIN</div>
+            <button type="button" class="btn-copy" id="btn-copy-page">Salin Teks Halaman</button>
+
+            <div class="divider"></div>
+
             <div class="section-label">BUKA</div>
-            <button class="btn-open" id="btn-chatgpt">ChatGPT</button>
-            <button class="btn-open" id="btn-claude">Claude</button>
-            <button class="btn-open" id="btn-gemini">Gemini</button>
-            <button class="btn-open" id="btn-qwen">Qwen</button>
-            <button class="btn-open" id="btn-grok">Grok</button>
-            <button class="btn-open" id="btn-deepseek">DeepSeek</button>
+            <button type="button" class="btn-open" id="btn-chatgpt">ChatGPT</button>
+            <button type="button" class="btn-open" id="btn-claude">Claude</button>
+            <button type="button" class="btn-open" id="btn-gemini">Gemini</button>
+            <button type="button" class="btn-open" id="btn-qwen">Qwen</button>
+            <button type="button" class="btn-open" id="btn-grok">Grok</button>
+            <button type="button" class="btn-open" id="btn-deepseek">DeepSeek</button>
         </div>
         <script src="popup.js"></script>
     </body>

@@ -1,13 +1,20 @@
 {
-  "manifest_version": 3,
-  "name": "Tung",
-  "version": "1.2",
-  "description": "Tung",
-  "permissions": ["windows", "tabs", "system.display", "history"],
-  "action": {
-    "default_popup": "popup.html"
-  },
-  "background": {
-    "service_worker": "background.js"
-  }
+	"manifest_version": 3,
+	"name": "Tung",
+	"version": "1.2",
+	"description": "Tung",
+	"permissions": [
+		"windows",
+		"tabs",
+		"system.display",
+		"history",
+		"scripting",
+		"activeTab"
+	],
+	"action": {
+		"default_popup": "popup.html"
+	},
+	"background": {
+		"service_worker": "background.js"
+	}
 }

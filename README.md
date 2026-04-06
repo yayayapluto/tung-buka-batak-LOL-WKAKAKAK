@@ -1,29 +1,47 @@
-# Tung Chrome Extension
+# Gem Chrome Extension
 
-## How to Install
+A Chrome extension that opens AI tools (ChatGPT, Claude, Gemini, Qwen, Grok, DeepSeek) as mini popup windows, pinned to the corner of your screen. Also supports copying the current page's text content to clipboard.
 
-### 1. Build the extension
+## Requirements
+
+- [Bun](https://bun.sh) — runtime and package manager
+
+## Setup
 
 ```bash
-npm install
-npm run build
+bun install
+cp .env.example .env
 ```
 
-This generates the extension files in the `dist/` folder.
+Fill in `.env` with your AI chat URLs before building.
 
-### 2. Load in Chrome
-
-1. Open Chrome and go to `chrome://extensions/`
-2. Enable **Developer mode** (toggle in the top-right corner)
-3. Click **Load unpacked**
-4. Select the `dist/` folder
-
-The extension icon will appear in your Chrome toolbar.
-
-### 3. Environment setup
-
-Copy `.env.example` to `.env` and fill in the required values before building:
+## Development
 
 ```bash
-cp .env.example .env
+bun run build        # compile + minify + obfuscate → dist/
+bun run check        # lint + format check (read-only)
+bun run lint         # lint + format check with auto-fix
+bun run type-check   # TypeScript type check only
+```
+
+## Load in Chrome
+
+1. Run `bun run build`
+2. Go to `chrome://extensions/`
+3. Enable **Developer mode**
+4. Click **Load unpacked** → select the `dist/` folder
+
+## Project Structure
+
+```
+src/
+├── background.ts   # Service worker: window management
+├── popup.ts        # Popup UI logic
+├── popup.html      # Popup UI
+├── manifest.json   # Extension manifest (MV3)
+├── types.ts        # Shared types
+└── env.d.ts        # process.env type declarations
+build.ts            # Build script (esbuild → obfuscator)
+biome.json          # Linter + formatter config
+tsconfig.json       # TypeScript config (IDE/type-check only)
 ```
