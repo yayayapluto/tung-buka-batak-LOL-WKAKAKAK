@@ -12,6 +12,7 @@ const CONFIGS: Record<string, string> = {
 let position: Position = "right";
 
 function setPosition(pos: Position): void {
+	console.log(`[Gem] position button clicked: ${pos}`);
 	position = pos;
 	document
 		.getElementById("posLeft")
@@ -21,13 +22,15 @@ function setPosition(pos: Position): void {
 		?.classList.toggle("active", pos === "right");
 }
 
-function openUrl(url: string): void {
+function openUrl(key: string, url: string): void {
+	console.log(`[Gem] open button clicked: ${key}`, { url, position });
 	const message: OpenMiniMessage = { action: "openMini", url, position };
 	chrome.runtime.sendMessage(message);
 	window.close();
 }
 
 async function copyPageText(): Promise<void> {
+	console.log("[Gem] copy page button clicked");
 	const btn = document.getElementById("btn-copy-page") as HTMLButtonElement;
 	const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 	if (!tab.id || !tab.url || /^(chrome|about|data|javascript):/.test(tab.url))
@@ -61,5 +64,5 @@ document
 for (const [key, url] of Object.entries(CONFIGS)) {
 	document
 		.getElementById(`btn-${key}`)
-		?.addEventListener("click", () => openUrl(url));
+		?.addEventListener("click", () => openUrl(key, url));
 }

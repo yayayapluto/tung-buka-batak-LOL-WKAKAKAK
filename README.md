@@ -18,7 +18,7 @@ Fill in `.env` with your AI chat URLs before building.
 ## Development
 
 ```bash
-bun run build        # compile + minify + obfuscate → dist/
+bun run build        # compile + minify → dist/
 bun run check        # lint + format check (read-only)
 bun run lint         # lint + format check with auto-fix
 bun run type-check   # TypeScript type check only
@@ -41,7 +41,7 @@ src/
 ├── manifest.json   # Extension manifest (MV3)
 ├── types.ts        # Shared types
 └── env.d.ts        # process.env type declarations
-build.ts            # Build script (esbuild → obfuscator)
+build.ts            # Build script (esbuild → dist/)
 biome.json          # Linter + formatter config
 tsconfig.json       # TypeScript config (IDE/type-check only)
 ```

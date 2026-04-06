@@ -12,7 +12,7 @@ cp .env.example .env
 ## Commands
 
 ```bash
-bun run build        # compile → minify → obfuscate → dist/
+bun run build        # compile → minify → dist/
 bun run check        # lint + format check (read-only)
 bun run lint         # lint + format check with auto-fix
 bun run type-check   # tsc --noEmit, no output files
@@ -34,10 +34,9 @@ Two isolated browser contexts that communicate only via `chrome.runtime.sendMess
 
 ## Build Pipeline
 
-`build.ts` runs three sequential steps:
+`build.ts` runs two sequential steps:
 
 1. **esbuild** — bundles + minifies `src/popup.ts` and `src/background.ts` into `dist/`
-2. **javascript-obfuscator** — post-processes minified output with `target: "browser-no-eval"` (MV3 CSP-safe, no `eval`), base64 string array encoding, hexadecimal identifier names
-3. Copies `src/popup.html` and `src/manifest.json` to `dist/`
+2. Copies `src/popup.html` and `src/manifest.json` to `dist/`
 
 `tsconfig.json` is for IDE type-checking only — esbuild handles actual TS compilation.
