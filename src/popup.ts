@@ -47,7 +47,10 @@ async function copyPageText(): Promise<void> {
 	await navigator.clipboard.writeText(text);
 	btn.textContent = "Tersalin!";
 	btn.classList.add("copied");
-	setTimeout(() => window.close(), 800);
+	setTimeout(() => {
+		btn.textContent = "Salin Teks Halaman";
+		btn.classList.remove("copied");
+	}, 1500);
 }
 
 document

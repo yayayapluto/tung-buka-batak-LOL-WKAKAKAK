@@ -2,6 +2,11 @@
 
 A Chrome extension that opens AI tools (ChatGPT, Claude, Gemini, Qwen, Grok, DeepSeek) as mini popup windows, pinned to the corner of your screen. Also supports copying the current page's text content to clipboard.
 
+## Features
+
+- Open AI tools (ChatGPT, Claude, Gemini, Qwen, Grok, DeepSeek) as mini popup windows pinned to the left or right of your screen
+- **Copy page text** — copies the current tab's full text content to clipboard; shows "Tersalin!" feedback then resets, keeping the popup open so you can continue using other buttons
+
 ## Requirements
 
 - [Bun](https://bun.sh) — runtime and package manager
