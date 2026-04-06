@@ -9,7 +9,8 @@
 		"system.display",
 		"history",
 		"scripting",
-		"activeTab"
+		"activeTab",
+		"clipboardWrite"
 	],
 	"action": {
 		"default_popup": "popup.html"

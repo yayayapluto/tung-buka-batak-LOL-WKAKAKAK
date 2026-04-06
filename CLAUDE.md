@@ -29,7 +29,7 @@ Copy `.env.example` to `.env` before building. All `URL_*` variables are injecte
 Two isolated browser contexts that communicate only via `chrome.runtime.sendMessage`:
 
 - **`src/background.ts`** — MV3 service worker. Handles all window management: opens AI tools as Chrome popup windows (`type: "popup"`), tracks open windows in `Map<windowId, url>`, and deletes history entries on close. Calculates spawn position via `chrome.system.display` with a fallback to current window bounds.
-- **`src/popup.ts`** — Extension popup UI. Reads position state locally, sends `OpenMiniMessage` to background, then immediately calls `window.close()`. Does no async work itself.
+- **`src/popup.ts`** — Extension popup UI. Reads position state locally, sends `OpenMiniMessage` to background, then immediately calls `window.close()`. Also handles the copy-page-text feature: executes a content script via `chrome.scripting.executeScript` to extract `document.body.innerText`, then writes it to the clipboard via `navigator.clipboard.writeText` (requires `"clipboardWrite"` permission).
 - **`src/types.ts`** — Shared types (`OpenMiniMessage`, `Position`) imported by both contexts.
 
 ## Build Pipeline
