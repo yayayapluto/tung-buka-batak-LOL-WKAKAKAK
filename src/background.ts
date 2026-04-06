@@ -68,8 +68,11 @@ async function getSpawnPosition(
 	}
 }
 
-chrome.runtime.onMessage.addListener((message: OpenMiniMessage) => {
-	if (message.action === "openMini" && message.url && message.position) {
-		openMini(message.url, message.position);
-	}
-});
+chrome.runtime.onMessage.addListener(
+	(message: OpenMiniMessage, sender: chrome.runtime.MessageSender) => {
+		if (sender.id !== chrome.runtime.id) return;
+		if (message.action === "openMini" && message.url && message.position) {
+			openMini(message.url, message.position);
+		}
+	},
+);

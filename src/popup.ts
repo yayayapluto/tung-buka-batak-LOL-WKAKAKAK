@@ -30,7 +30,8 @@ function openUrl(url: string): void {
 async function copyPageText(): Promise<void> {
 	const btn = document.getElementById("btn-copy-page") as HTMLButtonElement;
 	const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-	if (!tab.id) return;
+	if (!tab.id || !tab.url || /^(chrome|about|data|javascript):/.test(tab.url))
+		return;
 
 	const results = await chrome.scripting.executeScript({
 		target: { tabId: tab.id },
