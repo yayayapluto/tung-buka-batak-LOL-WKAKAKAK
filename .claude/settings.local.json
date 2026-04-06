@@ -5,7 +5,10 @@
       "Bash(bun run:*)",
       "Bash(bun install:*)",
       "Bash(bunx tsc:*)",
-      "Bash(bunx biome:*)"
+      "Bash(bunx biome:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(git push:*)"
     ]
   }
 }
