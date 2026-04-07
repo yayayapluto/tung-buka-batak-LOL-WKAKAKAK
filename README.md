@@ -10,6 +10,7 @@ A Chrome extension that opens AI tools (ChatGPT, Claude, Gemini, Qwen, Grok, Dee
   - Theme/UI icons are filtered out
   - Block-level formatting is preserved; each question is separated by `----`
   - Shows "Tersalin!" feedback then resets, keeping the popup open
+- **Save as PDF** — opens the browser's print dialog on the active tab for saving as PDF
 
 ## Requirements
 

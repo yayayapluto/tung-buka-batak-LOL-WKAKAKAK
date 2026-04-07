@@ -110,9 +110,26 @@ document
 	.getElementById("posRight")
 	?.addEventListener("click", () => setPosition("right"));
 
+async function savePageAsPdf(): Promise<void> {
+	console.log("[Gem] save pdf button clicked");
+	const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+	if (!tab.id || !tab.url || /^(chrome|about|data|javascript):/.test(tab.url))
+		return;
+
+	await chrome.scripting.executeScript({
+		target: { tabId: tab.id },
+		func: () => window.print(),
+	});
+	window.close();
+}
+
 document
 	.getElementById("btn-copy-page")
 	?.addEventListener("click", copyPageText);
+
+document
+	.getElementById("btn-save-pdf")
+	?.addEventListener("click", savePageAsPdf);
 
 for (const [key, url] of Object.entries(CONFIGS)) {
 	document
